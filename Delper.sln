@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delper", "Delper\Delper.csproj", "{EF57E57A-1CBF-42E6-8B8D-D906D6483ED8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF57E57A-1CBF-42E6-8B8D-D906D6483ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF57E57A-1CBF-42E6-8B8D-D906D6483ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF57E57A-1CBF-42E6-8B8D-D906D6483ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF57E57A-1CBF-42E6-8B8D-D906D6483ED8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E07734E4-4E60-43B4-9D4A-D9E4B3BB4B0F}
+	EndGlobalSection
+EndGlobal
