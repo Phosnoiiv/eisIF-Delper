@@ -13,5 +13,12 @@ namespace EverISay.LoveLive.SIF.Delper {
         public Form1() {
             InitializeComponent();
         }
+
+        private void OpenFormCard1(object sender, EventArgs e) {
+            FormCard1 form = new FormCard1 {
+                MdiParent = this,
+            };
+            form.Show();
+        }
     }
 }
