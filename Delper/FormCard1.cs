@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace EverISay.LoveLive.SIF.Delper {
@@ -12,12 +13,15 @@ namespace EverISay.LoveLive.SIF.Delper {
             InitializeComponent();
         }
 
+        private const string ICON_UNAVAILABLE = "暂未生成";
+
         private MySqlConnection cm;
         private SQLiteConnection clUnit;
         private int cardCount = 0;
         private int cardPageMax = 0;
         private readonly string cardIconPath = Properties.Settings.Default.SitePathR2 + "sif\\card\\icon1\\";
         private List<int> signedCardIds = new List<int>();
+        private byte[] buffer = new byte[1024];
 
         private void FormCard1Load(object sender, EventArgs e) {
             var cmsb = new MySqlConnectionStringBuilder() {
@@ -54,6 +58,9 @@ namespace EverISay.LoveLive.SIF.Delper {
             clUnit.Close();
         }
 
+        private string GetIconFilename(int cardId, string suffix = "") {
+            return Math.Ceiling(cardId / 100D) + "\\" + cardId + suffix + ".png";
+        }
         private void PageChanged(object sender, KeyPressEventArgs e) {
             if (e.KeyChar != (char)Keys.Enter) return;
             int.TryParse(tstbPage.Text, out int pageNum);
@@ -70,28 +77,74 @@ namespace EverISay.LoveLive.SIF.Delper {
                     cmr.GetInt32("unit_number"),
                     cmr.GetValue(2),
                 };
-                if (File.Exists(cardIconPath + pageNum + "\\" + cardId + ".png")) {
+                if (File.Exists(cardIconPath + GetIconFilename(cardId))) {
                     cols.Add("OK");
                 } else {
-                    cols.Add("暂未生成");
+                    cols.Add(ICON_UNAVAILABLE);
                 }
                 if (cmr.GetBoolean("idolized")) {
                     cols.Add("无");
-                } else if (File.Exists(cardIconPath + pageNum + "\\" + cardId + "i.png")) {
+                } else if (File.Exists(cardIconPath + GetIconFilename(cardId, "i"))) {
                     cols.Add("OK");
                 } else {
-                    cols.Add("暂未生成");
+                    cols.Add(ICON_UNAVAILABLE);
                 }
                 if (!signedCardIds.Contains(cardId)) {
                     cols.Add("无");
-                } else if (File.Exists(cardIconPath + pageNum + "\\" + cardId + "s.png")) {
+                } else if (File.Exists(cardIconPath + GetIconFilename(cardId, "s"))) {
                     cols.Add("OK");
                 } else {
-                    cols.Add("暂未生成");
+                    cols.Add(ICON_UNAVAILABLE);
                 }
                 dgvCards.Rows.Add(cols.ToArray());
             }
             cmr.Close();
+        }
+        private void DownloadIcons(object sender, EventArgs e) {
+            foreach (DataGridViewRow row in dgvCards.Rows) {
+                var cardId = Convert.ToInt32(row.Cells[0].Value);
+                if (ICON_UNAVAILABLE.Equals(row.Cells[3].Value)) {
+                    DownloadUnsignedIcon(cardId, "", "normal_icon_asset");
+                }
+                if (ICON_UNAVAILABLE.Equals(row.Cells[4].Value)) {
+                    DownloadUnsignedIcon(cardId, "i", "rank_max_icon_asset");
+                }
+                if (ICON_UNAVAILABLE.Equals(row.Cells[5].Value)) {
+                    DownloadSignedIcon(cardId);
+                }
+            }
+            MessageBox.Show("已完成。");
+        }
+        private void DownloadUnsignedIcon(int cardId, string suffix, string columnName) {
+            var filename = Properties.Settings.Default.G1CardDownloadPath + GetIconFilename(cardId, suffix);
+            if (File.Exists(filename)) return;
+            var clc = new SQLiteCommand("SELECT " + columnName + " FROM unit_m WHERE unit_id=" + cardId, clUnit);
+            using (var clr = clc.ExecuteReader()) {
+                clr.Read();
+                DownloadIcon(clr.GetString(0), filename);
+            }
+        }
+        private void DownloadSignedIcon(int cardId) {
+            var filename = Properties.Settings.Default.G1CardDownloadPath + GetIconFilename(cardId, "s");
+            if (File.Exists(filename)) return;
+            var clc = new SQLiteCommand("SELECT rank_max_icon_asset FROM unit_sign_asset_m WHERE unit_id=" + cardId, clUnit);
+            using (var clr = clc.ExecuteReader()) {
+                clr.Read();
+                DownloadIcon(clr.GetString(0), filename);
+            }
+        }
+        private void DownloadIcon(string path, string filename) {
+            var req = WebRequest.CreateHttp(Properties.Settings.Default.G1DownloadFrom + path);
+            var res = req.GetResponse();
+            var reqStream = res.GetResponseStream();
+            var saveStream = new FileStream(filename, FileMode.CreateNew);
+            int size;
+            while ((size = reqStream.Read(buffer, 0, 1024)) > 0) {
+                saveStream.Write(buffer, 0, size);
+            }
+            saveStream.Close();
+            reqStream.Close();
+            res.Close();
         }
 
         private void DataGridViewCardsFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
@@ -100,7 +153,7 @@ namespace EverISay.LoveLive.SIF.Delper {
                     case "OK":
                         e.CellStyle.ForeColor = Color.DarkGreen;
                         break;
-                    case "暂未生成":
+                    case ICON_UNAVAILABLE:
                         e.CellStyle.ForeColor = Color.DarkRed;
                         break;
                     case "无":

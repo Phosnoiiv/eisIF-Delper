@@ -24,11 +24,13 @@ namespace EverISay.LoveLive.SIF.Delper {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCard1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tsGeneral = new System.Windows.Forms.ToolStrip();
             this.tstbPage = new System.Windows.Forms.ToolStripTextBox();
             this.tslPageMax = new System.Windows.Forms.ToolStripLabel();
+            this.tsbDownload = new System.Windows.Forms.ToolStripButton();
             this.dgvCards = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,7 +46,8 @@ namespace EverISay.LoveLive.SIF.Delper {
             // 
             this.tsGeneral.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tstbPage,
-            this.tslPageMax});
+            this.tslPageMax,
+            this.tsbDownload});
             this.tsGeneral.Location = new System.Drawing.Point(0, 0);
             this.tsGeneral.Name = "tsGeneral";
             this.tsGeneral.Size = new System.Drawing.Size(800, 25);
@@ -63,6 +66,16 @@ namespace EverISay.LoveLive.SIF.Delper {
             this.tslPageMax.Name = "tslPageMax";
             this.tslPageMax.Size = new System.Drawing.Size(20, 22);
             this.tslPageMax.Text = "/0";
+            // 
+            // tsbDownload
+            // 
+            this.tsbDownload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbDownload.Image = ((System.Drawing.Image)(resources.GetObject("tsbDownload.Image")));
+            this.tsbDownload.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDownload.Name = "tsbDownload";
+            this.tsbDownload.Size = new System.Drawing.Size(36, 22);
+            this.tsbDownload.Text = "下载";
+            this.tsbDownload.Click += new System.EventHandler(this.DownloadIcons);
             // 
             // dgvCards
             // 
@@ -173,5 +186,6 @@ namespace EverISay.LoveLive.SIF.Delper {
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIconNormal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIconIdolized;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIconSigned;
+        private System.Windows.Forms.ToolStripButton tsbDownload;
     }
 }

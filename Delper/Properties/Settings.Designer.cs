@@ -23,48 +23,87 @@ namespace EverISay.LoveLive.SIF.Delper.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
         public string MySQLServer {
             get {
                 return ((string)(this["MySQLServer"]));
             }
+            set {
+                this["MySQLServer"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("root")]
         public string MySQLUserID {
             get {
                 return ((string)(this["MySQLUserID"]));
             }
+            set {
+                this["MySQLUserID"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string MySQLPassword {
             get {
                 return ((string)(this["MySQLPassword"]));
             }
+            set {
+                this["MySQLPassword"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SitePathR2 {
             get {
                 return ((string)(this["SitePathR2"]));
             }
+            set {
+                this["SitePathR2"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SQLiteDecryptedPath {
             get {
                 return ((string)(this["SQLiteDecryptedPath"]));
+            }
+            set {
+                this["SQLiteDecryptedPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string G1CardDownloadPath {
+            get {
+                return ((string)(this["G1CardDownloadPath"]));
+            }
+            set {
+                this["G1CardDownloadPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://card.niconi.co.ni/asset/")]
+        public string G1DownloadFrom {
+            get {
+                return ((string)(this["G1DownloadFrom"]));
+            }
+            set {
+                this["G1DownloadFrom"] = value;
             }
         }
     }

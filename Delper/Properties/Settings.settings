@@ -2,20 +2,26 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EverISay.LoveLive.SIF.Delper.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MySQLServer" Type="System.String" Scope="Application">
+    <Setting Name="MySQLServer" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost</Value>
     </Setting>
-    <Setting Name="MySQLUserID" Type="System.String" Scope="Application">
+    <Setting Name="MySQLUserID" Type="System.String" Scope="User">
       <Value Profile="(Default)">root</Value>
     </Setting>
-    <Setting Name="MySQLPassword" Type="System.String" Scope="Application">
+    <Setting Name="MySQLPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SitePathR2" Type="System.String" Scope="Application">
+    <Setting Name="SitePathR2" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SQLiteDecryptedPath" Type="System.String" Scope="Application">
+    <Setting Name="SQLiteDecryptedPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="G1CardDownloadPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="G1DownloadFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://card.niconi.co.ni/asset/</Value>
     </Setting>
   </Settings>
 </SettingsFile>
