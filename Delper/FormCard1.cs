@@ -67,7 +67,8 @@ namespace EverISay.LoveLive.SIF.Delper {
             if (pageNum < 1 || pageNum > cardPageMax) return;
             dgvCards.Rows.Clear();
             var sql = "SELECT unit_id,unit_number,jp_name,idolized FROM unit "
-                    + "WHERE unit_id BETWEEN " + (pageNum * 100 - 99) + " AND " + (pageNum * 100);
+                    + "WHERE unit_id BETWEEN " + (pageNum * 100 - 99) + " AND " + (pageNum * 100)
+                    + " AND unit_number<500000";
             var cmc = new MySqlCommand(sql, cm);
             var cmr = cmc.ExecuteReader();
             while (cmr.Read()) {
